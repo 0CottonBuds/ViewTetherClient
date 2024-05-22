@@ -1,13 +1,9 @@
-#include "clientwidget.h"
-
 #include <QApplication>
+
+#include <app.h>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    QMainWindow *mainWindow = new QMainWindow();
-    Ui_ClientWidget clientWidget;
-    clientWidget.setupUi(mainWindow);
-    mainWindow->show();
-    return a.exec();
+    App app = App(argc, argv);
+    return 0;
 }
