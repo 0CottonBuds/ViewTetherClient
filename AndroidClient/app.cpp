@@ -8,7 +8,6 @@ App::App(int argc, char *argv[]){
     clientWidget = new Ui_ClientWidget();
     clientWidget->setupUi(mainWindow);
 
-
     mainWindow->showFullScreen();
     mainWindow->show();
     qApplication->exec();
