@@ -13,6 +13,7 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
+    VIdeoWidget.h \
     app.h \
     clientwidget.h
 
