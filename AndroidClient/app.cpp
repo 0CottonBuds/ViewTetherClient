@@ -8,6 +8,10 @@ App::App(int argc, char *argv[]){
     clientWidget = new Ui_ClientWidget();
     clientWidget->setupUi(mainWindow);
 
+    clientWidget->streamPage->setLayout(new QVBoxLayout());
+    QLayout *streamPageLayout = clientWidget->streamPage->layout();
+    streamPageLayout->addWidget(&videoWidget);
+
     mainWindow->showFullScreen();
     mainWindow->show();
     qApplication->exec();

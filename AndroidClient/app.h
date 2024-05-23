@@ -5,6 +5,7 @@
 #include <QApplication>
 
 #include "clientwidget.h"
+#include "VIdeoWidget.h"
 
 class App : public QObject
 {
@@ -15,6 +16,7 @@ public:
 private:
     QApplication *qApplication;
     Ui_ClientWidget *clientWidget;
+    VideoWidget videoWidget;
 
 signals:
 };
