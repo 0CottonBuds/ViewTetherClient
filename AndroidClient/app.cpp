@@ -37,9 +37,10 @@ void App::connectToServer(){
 
 }
 
-void App::socketError(QAbstractSocket::SocketError socketError){
+void App::socketError(){
     QMessageBox *errorMsgBox = new QMessageBox();
+    clientWidget->ipLineEdit->setText("");
+    clientWidget->portLineEdit->setText("");
     errorMsgBox->setText("Socket Error: " + socket->errorString());
     errorMsgBox->exec();
 }
-

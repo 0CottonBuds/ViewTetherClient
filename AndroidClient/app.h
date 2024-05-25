@@ -23,7 +23,7 @@ private:
 
 public slots:
     void connectToServer();
-    void socketError(QAbstractSocket::SocketError socketError);
+    void socketError();
 
 signals:
 };
