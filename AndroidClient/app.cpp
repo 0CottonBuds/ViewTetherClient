@@ -30,6 +30,8 @@ void App::connectToServer(){
 
         connect(socket, &QTcpSocket::errorOccurred, this, &App::socketError);
         qDebug() << "Successfully conneted to server" ;
+
+        clientWidget->appRouter->setCurrentWidget(clientWidget->streamPage);
     }
     catch(std::exception e){
         qDebug() << "error connecting to server" ;
@@ -43,4 +45,6 @@ void App::socketError(){
     clientWidget->portLineEdit->setText("");
     errorMsgBox->setText("Socket Error: " + socket->errorString());
     errorMsgBox->exec();
+
+    clientWidget->appRouter->setCurrentWidget(clientWidget->connectionPage);
 }
