@@ -23,6 +23,7 @@ private:
 
 public slots:
     void connectToServer();
+    void socketRead();
     void socketError();
 
 signals:

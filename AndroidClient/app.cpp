@@ -29,6 +29,8 @@ void App::connectToServer(){
         socket->connectToHost(ipString, port);
 
         connect(socket, &QTcpSocket::errorOccurred, this, &App::socketError);
+        connect(socket, &QTcpSocket::disconnected, this, [this]{socket = nullptr;});
+        connect(socket, &QTcpSocket::readyRead, this, &App::socketRead);
         qDebug() << "Successfully conneted to server" ;
 
         clientWidget->appRouter->setCurrentWidget(clientWidget->streamPage);
@@ -36,6 +38,10 @@ void App::connectToServer(){
     catch(std::exception e){
         qDebug() << "error connecting to server" ;
     }
+
+}
+
+void App::socketRead(){
 
 }
 
