@@ -1,14 +1,14 @@
-#ifndef TCPCLIENT_H
-#define TCPCLIENT_H
+#ifndef STREAMCLIENT_H
+#define STREAMCLIENT_H
 
 #include <QObject>
 #include <QTcpSocket>
 
-class TcpClient : public QObject
+class StreamClient : public QObject
     {
     Q_OBJECT
 public:
-    TcpClient();
+    StreamClient();
     QTcpSocket* getSocket();
 
 public slots:
@@ -24,4 +24,4 @@ private:
     QTcpSocket *socket;
 };
 
-#endif // TCPCLIENT_H
+#endif // STREAMCLIENT_H

@@ -11,13 +11,13 @@ CONFIG += c++17
 SOURCES += \
     app.cpp \
     main.cpp \
-    tcpclient.cpp
+    streamclient.cpp
 
 HEADERS += \
     VIdeoWidget.h \
     app.h \
     clientwidget.h \
-    tcpclient.h
+    streamclient.h
 
 FORMS += \
     clientwidget.ui
