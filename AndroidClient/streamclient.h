@@ -13,12 +13,13 @@ public:
 
 public slots:
     void connectToHost(QString ip, quint16 port);
-    void readyRead();
+    void read();
 
 signals:
     void errorOccurred(QString errorString);
     void connected();
     void disconnected();
+    void socketReadComplete(QByteArray data);
 
 private:
     QTcpSocket *socket;

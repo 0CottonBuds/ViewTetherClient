@@ -1,8 +1,19 @@
 #include "streamclient.h"
 #include <QAbstractSocket>
+#include <QByteArray>
 
 StreamClient::StreamClient() {
     socket = new QTcpSocket();
+
+    connect(socket, &QTcpSocket::connected, this, &StreamClient::connected);
+    connect(socket, &QTcpSocket::connected, this, []{qDebug() << "Connected to server!";});
+    connect(socket, &QTcpSocket::disconnected, this, &StreamClient::disconnected);
+    connect(socket, &QTcpSocket::disconnected, this, []{qDebug() << "Disconnected to server!";});
+
+    connect(socket, &QTcpSocket::errorOccurred, this, [this]{emit errorOccurred(socket->errorString());});
+    connect(socket, &QTcpSocket::errorOccurred, this, [this]{qDebug() << socket->errorString();});
+
+    connect(socket, &QTcpSocket::readyRead, this, &StreamClient::read);
 }
 
 QTcpSocket *StreamClient::getSocket(){
@@ -11,15 +22,15 @@ QTcpSocket *StreamClient::getSocket(){
 
 void StreamClient::connectToHost(QString ip, quint16 port){
     socket->connectToHost(ip, port);
-
-    connect(socket, &QTcpSocket::connected, this, &StreamClient::connected);
-    connect(socket, &QTcpSocket::disconnected, this, &StreamClient::disconnected);
-    connect(socket, &QTcpSocket::errorOccurred, this, [this]{emit errorOccurred(socket->errorString());});
-    connect(socket, &QTcpSocket::errorOccurred, this, [this]{qDebug() << socket->errorString();});
-    connect(socket, &QTcpSocket::readyRead, this, &StreamClient::readyRead);
 }
 
-void StreamClient::readyRead()
-{
-    qDebug() << "ready to read on socket";
+void StreamClient::read(){
+    QByteArray buffer;
+
+    while(socket->bytesAvailable()){
+        buffer.append(socket->readAll());
+    }
+    qDebug() << buffer;
+
+    emit socketReadComplete(buffer);
 }

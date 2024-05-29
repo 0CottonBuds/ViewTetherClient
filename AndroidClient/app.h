@@ -3,8 +3,7 @@
 
 #include <QObject>
 #include <QApplication>
-#include <QTcpSocket>
-#include <QtNetwork/QAbstractSocket>
+#include <streamclient.h>
 
 #include "clientwidget.h"
 #include "VIdeoWidget.h"
@@ -19,12 +18,12 @@ private:
     QApplication *qApplication;
     Ui_ClientWidget *clientWidget;
     VideoWidget *videoWidget;
-    QTcpSocket *socket;
+    StreamClient streamClient;
 
 public slots:
     void connectToServer();
-    void socketRead();
-    void socketError();
+    void socketRead(QByteArray data);
+    void socketError(QString errorString);
 
 signals:
 };

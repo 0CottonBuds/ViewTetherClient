@@ -25,31 +25,27 @@ void App::connectToServer(){
         QString ipString =clientWidget->ipLineEdit->text();
         QString portString = clientWidget->portLineEdit->text();
         quint16 port = (quint16) portString.toInt();
-        socket = new QTcpSocket();
-        socket->connectToHost(ipString, port);
+        streamClient.connectToHost(ipString, port);
 
-        connect(socket, &QTcpSocket::errorOccurred, this, &App::socketError);
-        connect(socket, &QTcpSocket::disconnected, this, [this]{socket = nullptr;});
-        connect(socket, &QTcpSocket::readyRead, this, &App::socketRead);
-        qDebug() << "Successfully conneted to server" ;
+        connect(&streamClient, &StreamClient::errorOccurred, this, &App::socketError);
+        connect(&streamClient, &StreamClient::socketReadComplete , this, &App::socketRead);
 
         clientWidget->appRouter->setCurrentWidget(clientWidget->streamPage);
     }
     catch(std::exception e){
         qDebug() << "error connecting to server" ;
     }
-
 }
 
-void App::socketRead(){
-
+void App::socketRead(QByteArray data){
+    qDebug() << data;
 }
 
-void App::socketError(){
+void App::socketError(QString errorString){
     QMessageBox *errorMsgBox = new QMessageBox();
     clientWidget->ipLineEdit->setText("");
     clientWidget->portLineEdit->setText("");
-    errorMsgBox->setText("Socket Error: " + socket->errorString());
+    errorMsgBox->setText("Socket Error: " + errorString);
     errorMsgBox->exec();
 
     clientWidget->appRouter->setCurrentWidget(clientWidget->connectionPage);
