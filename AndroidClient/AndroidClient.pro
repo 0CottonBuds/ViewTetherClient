@@ -9,11 +9,13 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    StreamCodec.cpp \
     app.cpp \
     main.cpp \
     streamclient.cpp
 
 HEADERS += \
+    StreamCodec.h \
     VIdeoWidget.h \
     app.h \
     clientwidget.h \
