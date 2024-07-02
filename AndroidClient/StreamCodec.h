@@ -1,6 +1,8 @@
 #pragma once
 #include <QObject>
-#include "Windows.h"
+
+#include <android/native_window.h>
+#include <android/native_window_jni.h>
 
 extern "C" {
 #include <libavcodec/avcodec.h>
@@ -10,7 +12,7 @@ extern "C" {
 #include <libswscale/swscale.h>
 }
 
-#pragma comment(lib, "strmiids.lib")
+//#pragma comment(lib, "strmiids.lib")
 
 enum CodecType {
 	encode,
@@ -30,8 +32,8 @@ public:
 public slots:
 	
 	// encodes pixel data and emits encode finish when a packet is ready.
-	// remember to free the frame on the reciever of packet 
-	void encodeFrame(std::shared_ptr<UCHAR> pData);
+    // remember to free the frame on the reciever of packet
+    void encodeFrame(std::shared_ptr<unsigned char> pData);
 
 	// decodes avpacket and emits decode finish when a frame is ready.
 	// remember to free the frame on the reciever of frame
@@ -62,7 +64,7 @@ private:
 	void initializeEncoder();
 	void initializeEncoderSWS();
 	AVPacket* allocatepacket(AVFrame* frame);
-	AVFrame* allocateFrame(std::shared_ptr<UCHAR> pData);
+    AVFrame* allocateFrame(std::shared_ptr<unsigned char> pData);
 	AVFrame* convertFrameFromRGBAtoYUV(AVFrame* frame);
 
 	//decoder

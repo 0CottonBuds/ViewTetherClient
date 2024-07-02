@@ -24,6 +24,12 @@ HEADERS += \
 FORMS += \
     clientwidget.ui
 
+#ffmpeg path
+INCLUDEPATH = "C:/Users/Cotton-Orion/Documents/ffmpeg_x86_android/include"
+LIBS += -L"C:/Users/Cotton-Orion/Documents/ffmpeg_x86_android/lib" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
+LIBS += -landroid
+
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

@@ -80,7 +80,7 @@ void StreamCodec::initializeEncoderSWS()
 	}
 }
 
-void StreamCodec::encodeFrame(std::shared_ptr<UCHAR> pData)
+void StreamCodec::encodeFrame(std::shared_ptr<unsigned char> pData)
 {
 	if (type != CodecType::encode) {
 		qDebug() << "Error: not on encode mode";
@@ -137,7 +137,7 @@ AVPacket* StreamCodec::allocatepacket(AVFrame* frame)
 	return packet;
 }
 
-AVFrame* StreamCodec::allocateFrame(std::shared_ptr<UCHAR> pData)
+AVFrame* StreamCodec::allocateFrame(std::shared_ptr<unsigned char> pData)
 {
 	AVFrame* frame = av_frame_alloc();
 	if (!frame) {
@@ -234,7 +234,7 @@ void StreamCodec::initializeDecoder()
 		exit(1);
 	}
 
-	CoUninitialize();
+    //CoUninitialize();
 	int err = avcodec_open2(decoderContext, decoder, nullptr);
 	if (err < 0) {
 		qDebug() << "Could not open codec";
