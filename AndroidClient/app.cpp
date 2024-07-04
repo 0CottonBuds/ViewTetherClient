@@ -28,7 +28,6 @@ void App::connectToServer(){
         streamClient.connectToHost(ipString, port);
 
         connect(&streamClient, &StreamClient::errorOccurred, this, &App::socketError);
-        connect(&streamClient, &StreamClient::socketReadComplete , this, &App::socketRead);
 
         clientWidget->appRouter->setCurrentWidget(clientWidget->streamPage);
     }
@@ -38,7 +37,19 @@ void App::connectToServer(){
 }
 
 void App::socketRead(QByteArray data){
-    qDebug() << data;
+
+    // identifier can be msg and pkt;
+    std::string packetIdentifier = data.mid(0,2).toStdString();
+
+    if(packetIdentifier == "msg"){
+        qDebug() << data;
+        return;
+    }
+    if(packetIdentifier == "pkt"){
+
+    }
+
+    qDebug() << "data is not message";
 }
 
 void App::socketError(QString errorString){
