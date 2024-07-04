@@ -39,11 +39,12 @@ void StreamClient::read(){
 
     // read header data
     headerBuffer.append(socket->read(headerSize));
-    QByteArray headerBodyBuffer;
-    headerBodyBuffer.resize(headerSize);
-    headerStream.readRawData(headerBodyBuffer.data(), headerSize);
-    std::string packetIdentifier = QString::fromUtf8(headerBodyBuffer).toStdString();
+    QByteArray headerIdentifierBuffer;
+    headerIdentifierBuffer.resize(headerSize);
+    headerStream.readRawData(headerIdentifierBuffer.data(), headerSize);
+    std::string headerIdentifier = QString::fromUtf8(headerIdentifierBuffer).toStdString();
 
+    // contains the data of the packet
     QByteArray bodyBuffer;
     QDataStream bodyStream(&bodyBuffer, QIODevice::ReadOnly);
 
@@ -55,23 +56,17 @@ void StreamClient::read(){
     // note data is after 4 bytes
     // read body data
     // loop until packet buffer has all the data
-    bodyBuffer.append(socket->read(bodySize));
-    while(bodyBuffer.size() - (qint32) sizeof(qint32) < bodySize){
-        if(socket->waitForReadyRead(3000)){
-            bodyBuffer.append(socket->read(bodySize - bodyBuffer.size() - sizeof(qint32)));
-        }
-        else{
-            qDebug() << "Timeout or error occurred";
-            exit(1);
-        }
+    while(socket->bytesAvailable() < bodySize){
+        socket->waitForReadyRead();
     }
+    bodyBuffer.append(socket->read(bodySize));
 
 
-    if(packetIdentifier == "msg"){
+    if(headerIdentifier == "msg"){
         qDebug() << "Host Message: " <<  bodyBuffer.mid(4);
         return;
     }
-    else if(packetIdentifier == "pkt"){
+    else if(headerIdentifier == "pkt"){
         qDebug() << "packet acquired";
 
         AVPacket *avPacket = av_packet_alloc();
@@ -84,6 +79,7 @@ void StreamClient::read(){
             exit(1);
         }
 
-        memcpy(avPacket->data, bodyBuffer.data(), bodySize);
+        memcpy(avPacket->data, bodyBuffer.mid(4).data(), bodySize);
+        packetReady(avPacket);
     }
 }
