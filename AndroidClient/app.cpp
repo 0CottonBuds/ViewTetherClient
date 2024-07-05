@@ -36,22 +36,6 @@ void App::connectToServer(){
     }
 }
 
-void App::socketRead(QByteArray data){
-
-    // identifier can be msg and pkt;
-    std::string packetIdentifier = data.mid(0,2).toStdString();
-
-    if(packetIdentifier == "msg"){
-        qDebug() << data;
-        return;
-    }
-    if(packetIdentifier == "pkt"){
-
-    }
-
-    qDebug() << "data is not message";
-}
-
 void App::socketError(QString errorString){
     QMessageBox *errorMsgBox = new QMessageBox();
     clientWidget->ipLineEdit->setText("");

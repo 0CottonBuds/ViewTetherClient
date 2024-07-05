@@ -28,7 +28,6 @@ signals:
     void errorOccurred(QString errorString);
     void connected();
     void disconnected();
-    void socketReadComplete(QByteArray data);
     void packetReady(AVPacket* packet);
 
 private:

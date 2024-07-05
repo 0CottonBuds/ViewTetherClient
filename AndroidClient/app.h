@@ -22,7 +22,6 @@ private:
 
 public slots:
     void connectToServer();
-    void socketRead(QByteArray data);
     void socketError(QString errorString);
 
 signals:
