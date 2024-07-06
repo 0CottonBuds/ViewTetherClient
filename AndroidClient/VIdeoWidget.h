@@ -12,8 +12,8 @@ public:
         update();
     }
 
-    void updateImage(const QImage *image) {
-        currentImage = *image;
+    void updateImage(std::shared_ptr<QImage> image) {
+        currentImage = *image.get();
         update(); // Schedule a repaint
     }
 

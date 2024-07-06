@@ -7,6 +7,7 @@
 
 #include "clientwidget.h"
 #include "VIdeoWidget.h"
+#include "StreamCodec.h"
 
 class App : public QObject
 {
@@ -18,13 +19,16 @@ private:
     QApplication *qApplication;
     Ui_ClientWidget *clientWidget;
     VideoWidget *videoWidget;
-    StreamClient streamClient;
+    StreamClient *streamClient;
+    StreamCodec *streamDecoder;
 
 public slots:
     void connectToServer();
     void socketError(QString errorString);
+    void processFrame(AVFrame *frame);
 
 signals:
+    void imageReady(std::shared_ptr<QImage> img);
 };
 
 #endif // APP_H
