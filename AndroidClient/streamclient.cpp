@@ -67,8 +67,6 @@ void StreamClient::read(){
         return;
     }
     else if(headerIdentifier == "pkt"){
-        qDebug() << "packet acquired";
-
         AVPacket *avPacket = av_packet_alloc();
 
         avPacket->size = bodySize;

@@ -269,10 +269,11 @@ void StreamCodec::decodePacket(AVPacket* packet)
 		exit(1);
 	}
 
-	AVFrame* frame = av_frame_alloc();
+    AVFrame* frame;
 	int response = 0;
 	while (response >= 0) {
-		response = avcodec_receive_frame(decoderContext, frame);
+        frame = av_frame_alloc();
+        response = avcodec_receive_frame(decoderContext, frame);
 
 		if (response == AVERROR(EAGAIN) || response == AVERROR_EOF) {
 			break;

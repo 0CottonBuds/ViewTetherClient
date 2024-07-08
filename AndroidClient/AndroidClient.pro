@@ -27,7 +27,7 @@ FORMS += \
 #ffmpeg path
 INCLUDEPATH = "C:/Users/Cotton-Orion/Documents/ffmpeg_x86_android/include"
 LIBS += -L"C:/Users/Cotton-Orion/Documents/ffmpeg_x86_android/lib" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
-LIBS += -landroid
+#LIBS += -landroid
 
 
 # Default rules for deployment.

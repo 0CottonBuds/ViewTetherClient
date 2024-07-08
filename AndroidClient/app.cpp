@@ -5,7 +5,6 @@
 App::App(int argc, char *argv[]){
     qApplication = new QApplication(argc, argv);
     QMainWindow *mainWindow = new QMainWindow();
-    mainWindow->setLayout(new QVBoxLayout());
     clientWidget = new Ui_ClientWidget();
     clientWidget->setupUi(mainWindow);
 
@@ -14,7 +13,8 @@ App::App(int argc, char *argv[]){
     streamDecoder->run();
 
     clientWidget->streamPage->setLayout(new QVBoxLayout());
-    videoWidget = new VideoWidget(clientWidget->streamPage);
+    videoWidget = new VideoWidget();
+    clientWidget->streamPage->layout()->addWidget(videoWidget);
 
     connect(clientWidget->connectButton, &QPushButton::clicked, this, &App::connectToServer);
     connect(streamClient, &StreamClient::packetReady, streamDecoder, &StreamCodec::decodePacket);
@@ -54,10 +54,7 @@ void App::socketError(QString errorString){
 }
 
 void App::processFrame(AVFrame *frame){
-
-    unsigned char* pixelData = frame->data[0];
-
-    QImage *image = new QImage(pixelData, 1920, 1080, QImage::Format_RGBA8888);
+    QImage *image = new QImage(frame->data[0], 1920, 1080, QImage::Format_RGBA8888);
     std::shared_ptr<QImage> rgbSwappedImage = std::shared_ptr<QImage>(new QImage(image->rgbSwapped()));
     delete image;
 
