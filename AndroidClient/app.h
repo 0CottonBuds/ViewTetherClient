@@ -3,8 +3,15 @@
 
 #include <QObject>
 #include <QApplication>
-#include <streamclient.h>
 
+#ifdef Q_OS_ANDROID
+#include <QJniObject>
+#include <QJniEnvironment>
+#include <QtCore/private/qandroidextras_p.h>
+#include <QtCore>
+#endif
+
+#include <streamclient.h>
 #include "clientwidget.h"
 #include "VIdeoWidget.h"
 #include "StreamCodec.h"
@@ -26,6 +33,8 @@ public slots:
     void connectToServer();
     void socketError(QString errorString);
     void processFrame(AVFrame *frame);
+    void setOrientationLandscape();
+    void setOrientationPortrait();
 
 signals:
     void imageReady(std::shared_ptr<QImage> img);

@@ -1,4 +1,5 @@
-QT       += core gui network
+QT       += core gui network core-private
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,7 +28,10 @@ FORMS += \
 #ffmpeg path
 INCLUDEPATH = "C:/Users/Cotton-Orion/Documents/ffmpeg_x86_android/include"
 LIBS += -L"C:/Users/Cotton-Orion/Documents/ffmpeg_x86_android/lib" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
-#LIBS += -landroid
+
+android {
+    LIBS += -landroid
+}
 
 
 # Default rules for deployment.

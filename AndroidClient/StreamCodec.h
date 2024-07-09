@@ -1,8 +1,10 @@
 #pragma once
 #include <QObject>
 
-//#include <android/native_window.h>
-//#include <android/native_window_jni.h>
+#ifndef Q_OS_ANDROID
+    #include <android/native_window.h>
+    #include <android/native_window_jni.h>
+#endif
 
 extern "C" {
 #include <libavcodec/avcodec.h>

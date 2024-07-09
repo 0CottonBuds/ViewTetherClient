@@ -21,6 +21,10 @@ App::App(int argc, char *argv[]){
     connect(streamDecoder, &StreamCodec::decodeFinish, this, &App::processFrame);
     connect(this, &App::imageReady, videoWidget, &VideoWidget::updateImage);
 
+    connect(streamClient, &StreamClient::connected, this, &App::setOrientationLandscape);
+    connect(streamClient, &StreamClient::disconnected, this, &App::setOrientationPortrait);
+    connect(streamClient, &StreamClient::errorOccurred, this, &App::setOrientationPortrait);
+
     mainWindow->showFullScreen();
     mainWindow->show();
     qApplication->exec();
@@ -61,4 +65,30 @@ void App::processFrame(AVFrame *frame){
     emit imageReady(rgbSwappedImage);
 
     av_frame_free(&frame);
+}
+
+void App::setOrientationLandscape(){
+    #ifdef Q_OS_ANDROID
+        qDebug() << "Setting orientation to landscape";
+        QJniObject activity = QNativeInterface::QAndroidApplication::context();
+        if(activity.isValid()){
+            QJniObject::callStaticMethod<void>("org/qtproject/example/AndroidClient/MainActivity",
+                                               "setOrientationLandscape",
+                                               "(Landroid/app/Activity;)V",
+                                               activity.object<jobject>());
+        }
+    #endif
+}
+
+void App::setOrientationPortrait(){
+    #if defined(Q_OS_ANDROID)
+        qDebug() << "Setting orientation to portrait";
+        QJniObject activity = QNativeInterface::QAndroidApplication::context();
+        if(activity.isValid()){
+            QJniObject::callStaticMethod<void>("org/qtproject/example/AndroidClient/MainActivity",
+                                               "setOrientationPortrait",
+                                               "(Landroid/app/Activity;)V",
+                                               activity.object<jobject>());
+        }
+    #endif
 }
