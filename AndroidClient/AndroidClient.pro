@@ -40,6 +40,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    ../README.md \
     android-source/AndroidManifest.xml
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android-source/
