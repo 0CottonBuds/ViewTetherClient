@@ -1,7 +1,7 @@
 #pragma once
 #include <QObject>
 
-#ifndef Q_OS_ANDROID
+#ifdef Q_OS_ANDROID
     #include <android/native_window.h>
     #include <android/native_window_jni.h>
 #endif

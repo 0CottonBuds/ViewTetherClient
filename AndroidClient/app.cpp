@@ -25,7 +25,7 @@ App::App(int argc, char *argv[]){
     connect(streamClient, &StreamClient::disconnected, this, &App::setOrientationPortrait);
     connect(streamClient, &StreamClient::errorOccurred, this, &App::setOrientationPortrait);
 
-    mainWindow->showFullScreen();
+    //mainWindow->showFullScreen();
     mainWindow->show();
     qApplication->exec();
 }
