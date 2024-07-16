@@ -1,6 +1,6 @@
 # Second-Screen-Client
 
-Second-Screen-Client is an Android application designed to receive and display pixel data streamed from the Screen-Capture desktop application. This allows your Android device to function as a secondary screen for your Windows machine. Make sure to have the [Screen-Capture desktop application](https://github.com/0CottonBuds/Screen-Capture) installed and running on your Windows computer.
+Second-Screen-Client is an Desktop and Android application designed to receive and display pixel data streamed from the Screen-Capture desktop application. This allows your other device to function as a secondary screen for your Windows machine. Make sure to have the [Screen-Capture desktop application](https://github.com/0CottonBuds/Screen-Capture) installed and running on your Windows computer.
 
 ## Features
 
@@ -20,10 +20,3 @@ This project also includes FFmpeg, licensed under GPL. A copy of the GPL license
 ## Dependencies
 
 This application relies on FFmpeg for compressing frames. Ensure you have it linked in your development environment.
-
-# Known Issuess
-
-## Android refusing to connect to server
-If you encounter a problem on development where your android emulator refuses to connect to your TCP server. Remove the default avd arguments in qt creator only leave the 
-
-```avd -[insert name] ```
