@@ -1,1 +1,6 @@
 /AndroidClient/build/*
+
+*.lib
+*.a
+
+/AndroidClient/FFmpeg-libs/*
