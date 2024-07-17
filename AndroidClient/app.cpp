@@ -12,22 +12,46 @@ App::App(int argc, char *argv[]){
     streamDecoder = new StreamCodec(1080, 1920, 60, CodecType::decode);
     streamDecoder->run();
 
-    clientWidget->streamPage->setLayout(new QVBoxLayout());
-    videoWidget = new VideoWidget();
-    clientWidget->streamPage->layout()->addWidget(videoWidget);
+    initializeVideoWidget();
+    initializeButtons();
+    initializeMainEventLoop();
+    initializeOrientation();;
 
+    #ifdef Q_OS_ANDROID
+        mainWindow->showFullScreen();
+    #endif
+    mainWindow->show();
+    qApplication->exec();
+}
+
+void App::initializeVideoWidget(){
+    clientWidget->streamPage->setLayout(new QVBoxLayout());
+    auto streamPageLayout = clientWidget->streamPage->layout();
+    streamPageLayout->setSpacing(0);
+    videoWidget = new VideoWidget();
+    streamPageLayout->addWidget(videoWidget);
+}
+
+void App::initializeButtons(){
     connect(clientWidget->connectButton, &QPushButton::clicked, this, &App::connectToServer);
+    connect(clientWidget->aboutButton, &QPushButton::clicked, this, [this]{clientWidget->appRouter->setCurrentWidget(clientWidget->settingsPage);});
+    connect(clientWidget->connectionPageButton, &QPushButton::clicked, this, [this]{clientWidget->appRouter->setCurrentWidget(clientWidget->connectionPage);});
+    connect(clientWidget->backButton, &QPushButton::clicked, this, [this]{clientWidget->appRouter->setCurrentWidget(clientWidget->welcomePage);});
+
+
+
+}
+
+void App::initializeMainEventLoop(){
     connect(streamClient, &StreamClient::packetReady, streamDecoder, &StreamCodec::decodePacket);
     connect(streamDecoder, &StreamCodec::decodeFinish, this, &App::processFrame);
     connect(this, &App::imageReady, videoWidget, &VideoWidget::updateImage);
+}
 
+void App::initializeOrientation(){
     connect(streamClient, &StreamClient::connected, this, &App::setOrientationLandscape);
     connect(streamClient, &StreamClient::disconnected, this, &App::setOrientationPortrait);
     connect(streamClient, &StreamClient::errorOccurred, this, &App::setOrientationPortrait);
-
-    //mainWindow->showFullScreen();
-    mainWindow->show();
-    qApplication->exec();
 }
 
 

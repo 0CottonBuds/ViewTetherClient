@@ -29,6 +29,11 @@ private:
     StreamClient *streamClient;
     StreamCodec *streamDecoder;
 
+    void initializeVideoWidget();
+    void initializeButtons();
+    void initializeMainEventLoop();
+    void initializeOrientation();
+
 public slots:
     void connectToServer();
     void socketError(QString errorString);

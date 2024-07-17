@@ -26,8 +26,21 @@ FORMS += \
     clientwidget.ui
 
 #ffmpeg path
-INCLUDEPATH = "C:/Users/Cotton-Orion/Documents/ffmpeg_x86_android/include"
-LIBS += -L"C:/Users/Cotton-Orion/Documents/ffmpeg_x86_android/lib" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
+INCLUDEPATH = "./FFmpeg-libs/include"
+#LIBS += -L$$PWD\FFmpeg-lib\lib -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
+
+android:contains(QT_ARCH, arm64-v8a) {
+    message("arm64!");
+    LIBS += -L"C:\Users\Cotton-Orion\Documents\Screen-Capture-Android-Client\AndroidClient\FFmpeg-libs\lib\android-arm64" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
+}
+
+android:contains(QMAKE_HOST.arch, x86_64){
+    LIBS += -L"C:\Users\Cotton-Orion\Documents\Screen-Capture-Android-Client\AndroidClient\FFmpeg-libs\android-x86\lib" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
+}
+
+contains(QMAKE_HOST.arch, x86_64){
+    LIBS += -L"C:\Users\Cotton-Orion\Documents\Screen-Capture-Android-Client\AndroidClient\win-64\FFmpeg-libs\lib" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
+}
 
 android {
     LIBS += -landroid
