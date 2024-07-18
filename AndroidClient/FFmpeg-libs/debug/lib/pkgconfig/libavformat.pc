@@ -1,0 +1,13 @@
+prefix=${pcfiledir}/../..
+exec_prefix=${prefix}
+libdir=/c/dev/vcpkg/packages/ffmpeg_x86-android/debug/lib
+includedir=/c/dev/vcpkg/packages/ffmpeg_x86-android/debug/include
+
+Name: libavformat
+Description: FFmpeg container format library
+Version: 60.16.100
+Conflicts:
+
+Libs: "-L${libdir}" -lavformat -lm -latomic
+Requires: libavcodec >= 60.31.102, libswresample >= 4.12.100, libavutil >= 58.29.100 
+Cflags: "-I${includedir}"

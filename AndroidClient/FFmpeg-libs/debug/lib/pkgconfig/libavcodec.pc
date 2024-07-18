@@ -1,0 +1,13 @@
+prefix=${pcfiledir}/../..
+exec_prefix=${prefix}
+libdir=/c/dev/vcpkg/packages/ffmpeg_x86-android/debug/lib
+includedir=/c/dev/vcpkg/packages/ffmpeg_x86-android/debug/include
+
+Name: libavcodec
+Description: FFmpeg codec library
+Version: 60.31.102
+Conflicts:
+
+Libs: "-L${libdir}" -lavcodec -pthread -lm -latomic -landroid
+Requires: libswresample >= 4.12.100, libavutil >= 58.29.100 
+Cflags: "-I${includedir}"

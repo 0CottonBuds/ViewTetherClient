@@ -3,4 +3,4 @@
 *.lib
 *.a
 
-/AndroidClient/FFmpeg-libs/*
+/AndroidClient/FFmpeg-libs/libs/*

@@ -1,0 +1,13 @@
+prefix=${pcfiledir}/../..
+exec_prefix=${prefix}
+libdir=/c/dev/vcpkg/packages/ffmpeg_arm64-android/lib
+includedir=/c/dev/vcpkg/packages/ffmpeg_arm64-android/include
+
+Name: libavfilter
+Description: FFmpeg audio/video filtering library
+Version: 9.12.100
+Conflicts:
+
+Libs: "-L${libdir}" -lavfilter -pthread -lm -latomic
+Requires: libswscale >= 7.5.100, libavformat >= 60.16.100, libavcodec >= 60.31.102, libswresample >= 4.12.100, libavutil >= 58.29.100 
+Cflags: "-I${includedir}"

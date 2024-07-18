@@ -1,0 +1,13 @@
+prefix=${pcfiledir}/../..
+exec_prefix=${prefix}
+libdir=/c/dev/vcpkg/packages/ffmpeg_arm64-android/lib
+includedir=/c/dev/vcpkg/packages/ffmpeg_arm64-android/include
+
+Name: libswscale
+Description: FFmpeg image rescaling library
+Version: 7.5.100
+Conflicts:
+
+Libs: "-L${libdir}" -lswscale -lm -latomic
+Requires: libavutil >= 58.29.100 
+Cflags: "-I${includedir}"
