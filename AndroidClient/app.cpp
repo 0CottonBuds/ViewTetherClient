@@ -9,9 +9,8 @@ App::App(int argc, char *argv[]){
     clientWidget->setupUi(mainWindow);
 
     streamClient = new StreamClient();
-    streamDecoder = new StreamCodec(1080, 1920, 60, CodecType::decode);
-    streamDecoder->run();
 
+    initializeThreads();
     initializeVideoWidget();
     initializeButtons();
     initializeMainEventLoop();
@@ -22,6 +21,14 @@ App::App(int argc, char *argv[]){
     #endif
     mainWindow->show();
     qApplication->exec();
+}
+
+void App::initializeThreads(){
+    streamDecoder = new StreamCodec(1080, 1920, 60, CodecType::decode);
+    streamDecoder->moveToThread(&streamDecoderThread);
+    connect(&streamDecoderThread, &QThread::started, streamDecoder, &StreamCodec::run);
+    connect(&streamDecoderThread, &QThread::finished, streamDecoder, &QObject::deleteLater);
+    streamDecoderThread.start();
 }
 
 void App::initializeVideoWidget(){
@@ -37,9 +44,6 @@ void App::initializeButtons(){
     connect(clientWidget->aboutButton, &QPushButton::clicked, this, [this]{clientWidget->appRouter->setCurrentWidget(clientWidget->settingsPage);});
     connect(clientWidget->connectionPageButton, &QPushButton::clicked, this, [this]{clientWidget->appRouter->setCurrentWidget(clientWidget->connectionPage);});
     connect(clientWidget->backButton, &QPushButton::clicked, this, [this]{clientWidget->appRouter->setCurrentWidget(clientWidget->welcomePage);});
-
-
-
 }
 
 void App::initializeMainEventLoop(){

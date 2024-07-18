@@ -15,6 +15,7 @@
 #include "clientwidget.h"
 #include "VIdeoWidget.h"
 #include "StreamCodec.h"
+#include <QThread>
 
 class App : public QObject
 {
@@ -27,8 +28,10 @@ private:
     Ui_ClientWidget *clientWidget;
     VideoWidget *videoWidget;
     StreamClient *streamClient;
+    QThread streamDecoderThread;
     StreamCodec *streamDecoder;
 
+    void initializeThreads();
     void initializeVideoWidget();
     void initializeButtons();
     void initializeMainEventLoop();

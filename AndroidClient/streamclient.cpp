@@ -80,4 +80,9 @@ void StreamClient::read(){
         memcpy(avPacket->data, bodyBuffer.mid(4).data(), bodySize);
         emit packetReady(avPacket);
     }
+
+    if(socket->bytesAvailable() > 0){
+        read();
+    }
+    return;
 }
