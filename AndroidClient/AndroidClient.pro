@@ -35,11 +35,11 @@ android:contains(QT_ARCH, arm64-v8a) {
 }
 
 android:contains(QMAKE_HOST.arch, x86_64){
-    LIBS += -L"C:\Users\Cotton-Orion\Documents\Screen-Capture-Android-Client\AndroidClient\FFmpeg-libs\android-x86\lib" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
+    LIBS += -L"C:\Users\Cotton-Orion\Documents\Screen-Capture-Android-Client\AndroidClient\FFmpeg-libs\lib\android-x86" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
 }
 
 contains(QMAKE_HOST.arch, x86_64){
-    LIBS += -L"C:\Users\Cotton-Orion\Documents\Screen-Capture-Android-Client\AndroidClient\win-64\FFmpeg-libs\lib" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
+    LIBS += -L"C:\Users\Cotton-Orion\Documents\Screen-Capture-Android-Client\AndroidClient\FFmpeg-libs\lib\win-x64" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
 }
 
 android {
