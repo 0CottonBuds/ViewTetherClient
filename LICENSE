@@ -1,4 +1,4 @@
-# View Tether Client License
+                    View Tether Client License
                     
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
@@ -676,7 +676,7 @@ Public License instead of this License.  But first, please read
 <https://www.gnu.org/licenses/why-not-lgpl.html>.
 
 
-# FFmpeg License
+ FFmpeg License
 
 This project includes FFmpeg, which is licensed under the GPL. A copy of the GPL license is included in the `ffmpeg-source` directory.
 
