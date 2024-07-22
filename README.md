@@ -1,6 +1,6 @@
-# ViewTetherClient
+# View Tether Client
 
-ViewTetherClient is an Desktop and Android application designed to receive and display pixel data streamed from the ViewTether desktop application. This allows your other device to function as a secondary screen for your Windows machine. Make sure to have the [ViewTether desktop application](https://github.com/0CottonBuds/ViewTether) installed and running on your Windows computer.
+View Tether Client is an Desktop and Android application designed to receive and display pixel data streamed from the ViewTether desktop application. This allows your other device to function as a secondary screen for your Windows machine. Make sure to have the [ViewTether desktop application](https://github.com/0CottonBuds/ViewTether) installed and running on your Windows computer.
 
 ## Features
 
