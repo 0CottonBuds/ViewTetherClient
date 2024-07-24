@@ -1,6 +1,6 @@
-# Second-Screen-Client
+# View Tether Client
 
-Second-Screen-Client is an Desktop and Android application designed to receive and display pixel data streamed from the Screen-Capture desktop application. This allows your other device to function as a secondary screen for your Windows machine. Make sure to have the [Screen-Capture desktop application](https://github.com/0CottonBuds/Screen-Capture) installed and running on your Windows computer.
+View Tether Client is an cross-platform application designed to receive and display pixel data streamed from the ViewTether desktop application. This allows your other device to function as a secondary screen for your Windows machine. Make sure to have the [ViewTether desktop application](https://github.com/0CottonBuds/ViewTether) installed and running on your Windows computer.
 
 ## Features
 
@@ -9,11 +9,11 @@ Second-Screen-Client is an Desktop and Android application designed to receive a
 
 ## Acknowledgements
 
-This project utilizes technologies from the Screen-Capture project, including FFmpeg for frame compression. For more information on Screen-Capture, visit its [GitHub repository](https://github.com/0CottonBuds/Screen-Capture).
+This project utilizes technologies from the ViewTether project, including FFmpeg for frame compression. For more information on ViewTether, visit its [GitHub repository](https://github.com/0CottonBuds/ViewTether).
 
 ## License
 
-Screen-Capture is licensed under the GPL v3 License. See LICENSE.md for details.
+ViewTether is licensed under the GPL v3 License. See LICENSE.md for details.
 
 This project also includes FFmpeg, licensed under GPL. A copy of the GPL license is provided in the `FFmpeg-source` directory. For more information on FFmpeg and its licensing terms, visit the [official FFmpeg website](https://ffmpeg.org/legal.html).
 
