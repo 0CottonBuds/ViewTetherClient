@@ -14,7 +14,9 @@ extern "C" {
 #include <libswscale/swscale.h>
 }
 
-//#pragma comment(lib, "strmiids.lib")
+#ifdef Q_OS_WINDOWS
+    #pragma comment(lib, "strmiids.lib")
+#endif
 
 enum CodecType {
 	encode,

@@ -26,20 +26,20 @@ FORMS += \
     clientwidget.ui
 
 #ffmpeg path
-INCLUDEPATH = "./FFmpeg-libs/include"
-#LIBS += -L$$PWD\FFmpeg-lib\lib -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
 
 android:contains(QT_ARCH, arm64-v8a) {
-    message("arm64!");
-    LIBS += -L"$$PWD\FFmpeg-libs\lib\android-arm64" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
+    INCLUDEPATH = "./FFmpeg-libs/android-arm64/include"
+    LIBS += -L"$$PWD\FFmpeg-libs\android-arm64\lib" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
 }
 
 android:contains(QMAKE_HOST.arch, x86_64){
-    LIBS += -L"$$PWD\FFmpeg-libs\lib\android-x86" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
+    INCLUDEPATH = "./FFmpeg-libs/android-x86/include"
+    LIBS += -L"$$PWD\FFmpeg-libs\android-x86\lib" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
 }
 
 contains(QMAKE_HOST.arch, x86_64){
-    LIBS += -L"$$PWD\FFmpeg-libs\lib\win-x64" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale
+    INCLUDEPATH = "./FFmpeg-libs/win-x64/include"
+    LIBS += -L"$$PWD\FFmpeg-libs\win-x64\lib" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lswresample -lswscale -lbcrypt -lMfplat -lmfuuid -lSecur32
 }
 
 android {
